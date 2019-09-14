@@ -31,6 +31,7 @@ export default class Game extends React.Component {
       roleName: null,
       betweenRounds: null,
       totalBoopsRequired: null,
+      secondsForLastRound: null,
     }
   }
 
