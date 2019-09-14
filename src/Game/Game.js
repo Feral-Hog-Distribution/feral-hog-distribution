@@ -92,16 +92,26 @@ export default class Game extends React.Component {
     return booster.boops + navigator.boops + wrangler.boops + lifeSupport.boops
   }
 
+  getRole(roleId) {
+    return this.state[roleId]
+  }
+
+  yourScore(roleId) {
+    if (this.totalBoops() === 0) return "0"
+
+    return (this.getRole(roleId).boops/this.totalBoops()*100).toFixed(0)
+  }
+
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport, secondsForLastRound } = this.state
+    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound } = this.state
     if (betweenRounds) {
       return (
         <ScoreScreen
           secondsForRound={secondsForLastRound}
-          habitatorScore={lifeSupport.boops}
-          boosterScore={booster.boops}
-          wranglerScore={wrangler.boops}
-          navigatorScore={navigator.boops}
+          habitatorScore={this.yourScore(lifeSupport)}
+          boosterScore={this.yourScore(booster)}
+          wranglerScore={this.yourScore(wrangler)}
+          navigatorScore={this.yourScore(navigator)}
           cash={this.calcCash()}
           onNextRoundClick={this.nextRound}
         />
