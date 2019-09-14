@@ -1,0 +1,121 @@
+// .slider {
+//   width: 100%;
+//   display: flex;
+
+//   input {
+//     flex-grow: 1;
+//     max-width: 30rem;
+//     background-color: transparent;
+//     height: 500px;
+//   }
+// }
+
+.slider {
+  position: relative;
+
+  &.horizontal {
+    height: var(--button-dimension);
+
+    &[data-steps="5"] {
+      width: calc(var(--button-dimension) * 5);
+
+      [type="range"],
+      .slider_container {
+        height: var(--button-dimension);
+        width: calc(var(--button-dimension) * 5);
+      }
+    }
+  }
+
+  &.vertical {
+    width: var(--button-dimension);
+
+    &[data-steps="5"] {
+      height: calc(var(--button-dimension) * 5);
+    }
+
+    [type="range"],
+    .slider_container {
+      height: var(--button-dimension);
+      width: calc(var(--button-dimension) * 5);
+    }
+  }
+}
+
+.slider_container {
+  background-color: transparent;
+  transform-origin: calc(var(--button-dimension) * 5 / 2) calc(var(--button-dimension) * 5 / 2);
+}
+
+[type="range"] {
+  background-color: transparent;
+
+  &::-webkit-slider-runnable-track {
+    background-color: var(--blue);
+    border-top: .25rem solid var(--black);
+    border-bottom: .25rem solid var(--black);
+    height: 1rem;
+    border-radius: .25rem / 2;
+    position: relative;
+  }
+}
+
+  // Give the player something to interact with
+.slider.interactive {
+
+  .slider_container {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent calc(var(--button-dimension) / 15 * 7),
+      var(--yellow) calc(var(--button-dimension) / 15 * 7),
+      var(--yellow) calc(var(--button-dimension) / 15 * 8),
+      transparent calc(var(--button-dimension) / 15 * 8),
+      transparent var(--button-dimension)
+    );
+  }
+
+  [type="range"] {
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background-image: url('/img/thumb.svg');
+      border-radius: 0.25rem;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-top: -0.5rem;
+
+      width: var(--button-square-height);
+      min-height: calc(var(--button-square-height)/2);
+      transform: scale(1);
+    }
+
+    &:active {
+      &::-webkit-slider-thumb {
+        transform: scale(0.9);
+      }
+    }
+  }
+}
+
+.slider.vertical {
+  // min-height: 80vw;
+
+  .slider_container {
+    transform: rotate(-90deg);
+  }
+
+  // Give the player something to interact with
+  &.interactive {
+    [type="range"] {
+      &::-webkit-slider-thumb {
+        transform: rotate(90deg) scale(1);
+      }
+
+      &:active {
+        &::-webkit-slider-thumb {
+          transform: rotate(90deg) scale(0.9);
+        }
+      }
+    }
+  }
+}

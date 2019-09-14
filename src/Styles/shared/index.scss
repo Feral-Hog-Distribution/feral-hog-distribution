@@ -1,3 +1,5 @@
+@import "../config/mixins";
+@import "../config/abstractions";
 @import "general";
 @import "body";
 @import "main";
@@ -5,4 +7,5 @@
 @import "nav";
 @import "columns";
 @import "focus";
-
+@import "displays";
+@import "slider";

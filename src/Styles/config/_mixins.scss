@@ -1,5 +1,5 @@
-$arrow_width: 3rem;
-$arrow_height: 3rem;
+$arrow_width: var(--button-square-width);
+$arrow_height: var(--button-square-height);
 
 @mixin hide_text() {
   // If you want to hide the text from an element,
@@ -42,26 +42,26 @@ $arrow_height: 3rem;
   }
   @if ($direction == 'up') {
     border-top: none;
-    border-right: transparent solid ($width/2);
+    border-right: transparent solid calc(#{$width}/2);
     border-bottom: $colour solid $height;
-    border-left: transparent solid ($width/2);
+    border-left: transparent solid calc(#{$width}/2);
   }
   @if ($direction == 'down') {
     border-top: $colour solid $height;
-    border-right: transparent solid ($width/2);
+    border-right: transparent solid calc(#{$width}/2);
     border-bottom: none;
-    border-left: transparent solid ($width/2);
+    border-left: transparent solid calc(#{$width}/2);
   }
   @if ($direction == 'left') {
-    border-top: transparent solid ($height/2);
+    border-top: transparent solid calc(#{$height}/2);
     border-right: $colour solid $width;
-    border-bottom: transparent solid ($height/2);
+    border-bottom: transparent solid calc(#{$height}/2);
     border-left: none;
   }
   @if ($direction == 'right') {
-    border-top: transparent solid ($height/2);
+    border-top: transparent solid calc(#{$height}/2);
     border-right: none;
-    border-bottom: transparent solid ($height/2);
+    border-bottom: transparent solid calc(#{$height}/2);
     border-left: $colour solid $width;
   }
 }

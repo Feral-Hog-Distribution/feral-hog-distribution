@@ -1,8 +1,8 @@
 button {
   border: none;
   display: inline-block;
-  min-width: 3rem;
-  min-height: 3rem;
+  min-width: var(--button-square-width);
+  min-height: var(--button-square-height);
   background-color: transparent;
   @extend %animate_scale;
 

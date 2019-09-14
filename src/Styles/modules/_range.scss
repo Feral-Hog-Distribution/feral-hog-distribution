@@ -1,8 +1,8 @@
 #module_range {
-  height: 80vh;
+  height: 100vh;
 
   .row {
-    height: 80vh;
+    height: 100vh;
   }
 
   .column {
@@ -26,17 +26,8 @@
   flex-shrink: 1;
   flex-basis: 48%;
   position: relative;
-  /* background-color: white; */
   width: 100%;
   margin: auto;
-
-  .green_zone {
-    height: 20px;
-    width: 100%;
-    background-color: green;
-    z-index: 10;
-    position: absolute;
-  }
 
   input {
     position: absolute;

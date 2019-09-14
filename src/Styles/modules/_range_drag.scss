@@ -1,0 +1,45 @@
+#module_range_drag {
+  .row {
+    width: 100%;
+  }
+
+  .column {
+    width: 100%;
+  }
+}
+
+.range_drag_container {
+  width: 100%;
+  display: flex;
+
+  input {
+    flex-grow: 1;
+    max-width: 30rem;
+    background-color: transparent;
+    height: 500px;
+  }
+
+  input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-image: url(/img/thumb.svg);
+    border-radius: 4px;
+    background-repeat: no-repeat;
+    background-size: 6rem 3rem;
+    position: relative;
+    width: 6rem;
+    height: 10rem;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%) rotate(90deg) scale(1);
+
+    &:active {
+      transform-origin: 50% 50%;
+      transform: translate(-50%, -50%) rotate(90deg) scale(0.9);
+    }
+  }
+
+  input::-webkit-slider-runnable-track {
+    background-color: var(--blue);
+    height: .5rem;
+    border-radius: calc(.5rem / 2);
+  }
+}

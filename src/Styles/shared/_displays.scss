@@ -1,0 +1,12 @@
+.display_number {
+  min-width: 8rem;
+  font-size: 3rem;
+  font-weight: 900;
+  padding: .5rem 1rem;
+  padding-bottom: 1rem;
+  border: 8px var(--blue) solid;
+  display: inline-block;
+  border-radius: 3rem 1rem;
+  text-align: center;
+  box-shadow: 0px 4px 0px 0px var(--yellow);
+}

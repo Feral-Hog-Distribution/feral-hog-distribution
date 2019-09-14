@@ -1,49 +1,58 @@
+$screen_width: 75vw;
 #module_target {
   height: 100%;
 }
 
 .target_container {
+  --container-padding-modifier: 1.5;
+  --container-padding-vertical: calc(var(--button-square-height) * var(--container-padding-modifier));
+  --container-padding-horizontal: calc(var(--button-square-width) * var(--container-padding-modifier));
+
   position: relative;
-  height: 100%;
+  width: 100vw;
+  height: 100vw;
+  padding-top: var(--container-padding-vertical);
+  padding-right: var(--container-padding-horizontal);
+  padding-bottom: var(--container-padding-vertical);
+  padding-left: var(--container-padding-horizontal);
 
   button {
     position: absolute;
-    transform: translate(-50%, -50%);
   }
 
   [name="x"] {
     top: 50%;
+    margin-top: calc( var(--half-button-square-height) * -1 );
   }
   [name="y"] {
     left: 50%;
+    margin-left: calc( var(--half-button-square-height) * -1 );
   }
 
   [name="y"][value="-1"] {
-    top: 0;
+    top: calc( calc( var(--container-padding-vertical) - var(--button-square-height) ) / 2 );
   }
   [name="y"][value="1"] {
-    bottom: 0;
+    bottom: calc( calc( var(--container-padding-vertical) - var(--button-square-height) ) / 2 );
   }
   [name="x"][value="-1"] {
-    left: 0;
+    left: calc( calc( var(--container-padding-horizontal) - var(--button-square-width) ) / 2 );
   }
   [name="x"][value="1"] {
-    right: 0;
+    right: calc( calc( var(--container-padding-horizontal) - var(--button-square-width) ) / 2 );
   }
 
 }
 
 
 .target_screen {
+  @extend %circular;
   background-color: var(--blue);
-  border-radius: 100%;
-  width: 80%;
-  height: 0;
-  padding-bottom: 80%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: var(--container-padding-vertical);
+  right: var(--container-padding-horizontal);
+  bottom: var(--container-padding-vertical);
+  left: var(--container-padding-horizontal);
 }
 
 .target_reticle {
@@ -74,11 +83,10 @@
 }
 
 .target {
+  @extend %ring;
   position: absolute;
-  display: block;
   width: 1rem;
   height: 1rem;
-  border-width: .25rem;
   border-color: var(--yellow);
   border-style: solid;
   border-radius: 100%;
