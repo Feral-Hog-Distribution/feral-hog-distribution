@@ -10,7 +10,7 @@ import Range from '../Range/Range'
 
 export default function Game() {
   const [room, setRoom] = useState(null)
-  const [booster, setBoosterHealth] = useState(null)
+  const [boosterHealth, setBoosterHealth] = useState(null)
 
   useEffect(() => {
     const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer); 
@@ -19,7 +19,7 @@ export default function Game() {
 
       // Updating the states of each station
       room.state.booster.onChange = function (updates) {
-        updateHealthWithValue(updates, setBoosterHealth)
+        updateHealthWithValue(updates, (value) => setBoosterHealth(value))
       }
       // room.state.navigator.onChange = function (updates) {
       //   updateElementWithValue(updates, "navigator", "health")
@@ -34,7 +34,7 @@ export default function Game() {
   }, [])
 
   function updateBoosterHealth(value = 2) {
-    room.send({ command: 'booster', value });
+    room.send({ command: 'booster', value: value });
   }
 
   // function helpNavigator() {
@@ -52,8 +52,8 @@ export default function Game() {
   // Role select?
   return (
     <div id="game">
-      <p>Booster: {booster}</p>
-      <button onClick={updateBoosterHealth}>Boost</button>
+      <p>Booster: {boosterHealth}</p>
+      <button onClick={() => updateBoosterHealth()}>Boost</button>
       <div>
         <Range onValueChange={updateBoosterHealth} />
       </div>
