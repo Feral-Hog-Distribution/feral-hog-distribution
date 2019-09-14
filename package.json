@@ -1,5 +1,6 @@
 {
   "name": "feral-hog-distribution",
+  "homepage": "https://feral-hog-distribution.github.io/feral-hog-distribution/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
