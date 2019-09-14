@@ -9,22 +9,21 @@
     display: block;
     -webkit-appearance: none;
     border-radius: 100%;
-    border-color: brown;
-    background-color: brown;
-    width: 80vw;
-    height: 80vw;
+    border-color: var(--pink);
+    background-color: var(--pink);
+    width: 40vw;
+    height: 40vw;
     font-size: 10vw;
     margin: auto;
     transform: scale(1);
     transition: transform var(--animation-duration);
 
     &:active {
-      transform: scale(0.75);
+      transform: scale(0.90);
     }
 
     &:focus {
-      box-shadow: 0 0 20px green;
+      box-shadow: 0 0 20px var(--dark-pink);
     }
   }
 }
-

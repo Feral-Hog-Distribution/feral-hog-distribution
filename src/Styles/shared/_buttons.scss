@@ -11,6 +11,15 @@ button {
   }
 }
 
+button.text {
+  color: var(--yellow);
+  text-transform: uppercase;
+  font-size: var(--button-dimension);
+  padding: calc(var(--button-dimension) / 2);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
 button.circular {
   @extend %circular;
   background-color: var(--white);

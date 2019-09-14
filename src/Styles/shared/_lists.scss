@@ -1,0 +1,42 @@
+.list_score {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 2rem;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 30vw;
+    background-color: var(--blue);
+    margin: 0.5rem auto 2rem;
+  }
+
+  dt,
+  dd {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  dt {
+    flex-basis: 70%;
+    text-transform: uppercase;
+  }
+
+  dd {
+    flex-basis: 30%;
+    text-align: right;
+    padding-left: 0.5rem;
+
+    &.percent {
+      &::after {
+        content: '%';
+        color: var(--yellow);
+        font-size: 0.5em;
+        vertical-align: super;
+      }
+    }
+  }
+}

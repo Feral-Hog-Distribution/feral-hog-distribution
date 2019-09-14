@@ -1,0 +1,19 @@
+@keyframes strobe {
+  0% {stroke-width: 25;}
+  50% {stroke-width: 1;}
+  100% {stroke-width: 25;}
+}
+
+#screen_progress {
+  circle {
+    fill: var(--yellow);
+
+    &.active {
+      fill: var(--white);
+      stroke: var(--white);
+      animation-duration: 3s;
+      animation-name: strobe;
+      animation-iteration-count: infinite;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+body > header {
+  background-color: var(--black);
+  text-align: right;
+
+  img {
+    padding: 1rem;
+    max-width: 5rem;
+  }
+}
