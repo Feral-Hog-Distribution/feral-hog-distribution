@@ -44,7 +44,6 @@ export default class Game extends React.Component {
 
   componentDidMount() {
     const setState = (...state) => this.setState(...state)
-    const setHealthOf = (role, value) => this.setHealthOf(role, value)
 
     const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer); 
     client.joinOrCreate("feral-hog-distribution").then(room => {

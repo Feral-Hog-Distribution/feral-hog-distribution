@@ -14,7 +14,6 @@ export function findHealthForRole(updates, fieldName) {
 export function findValue(updates, fieldName) {
   const update =  updates.find(function(update) { return update.field === fieldName })
   if (!update) return null
-  console.log(update)
 
   return update.value
 }
