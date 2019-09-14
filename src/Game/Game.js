@@ -32,6 +32,7 @@ export default class Game extends React.Component {
       betweenRounds: null,
       totalBoopsRequired: null,
       secondsForLastRound: null,
+      multiplier: 100
     }
   }
 
@@ -52,7 +53,7 @@ export default class Game extends React.Component {
   componentDidMount() {
     const setState = (...state) => this.setState(...state)
 
-    const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer); 
+    const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer);
     client.joinOrCreate("feral-hog-distribution").then(room => {
       setState({ room })
 
@@ -70,6 +71,13 @@ export default class Game extends React.Component {
         setState(stateChanges)
       }
     })
+  }
+
+  calcCash() {
+    const { totalBoopsRequired, secondsForLastRound, multiplier} = this.state
+    const targetSpeed = totalBoopsRequired/40
+    const cash = targetSpeed/secondsForLastRound*multiplier
+    return cash.toFixed(0)
   }
 
   yourBoops() {
@@ -94,6 +102,7 @@ export default class Game extends React.Component {
           boosterScore={booster.boops}
           wranglerScore={wrangler.boops}
           navigatorScore={navigator.boops}
+          cash={this.calcCash()}
           onNextRoundClick={this.nextRound}
         />
       )
