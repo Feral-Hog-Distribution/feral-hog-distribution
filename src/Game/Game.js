@@ -1,6 +1,6 @@
 import * as Colyseus from "colyseus.js";
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './Game.scss'
 
 import { LocalServer, ProductionServer } from "../Constants"
@@ -13,56 +13,75 @@ const navigatorId = "navigator"
 const wranglerId = "wrangler"
 const lifeSupportId = "lifeSupport"
 
-export default function Game() {
-  const [room, setRoom] = useState(null)
-  const [boosterHealth, setBoosterHealth] = useState(null)
-  const [roleId, setRoleId] = useState(null)
-  const [playersRole, setPlayerRole] = useState(null)
+export default class Game extends React.Component {
+  defaultState = () => {
+    return {
+      room: null,
+      [boosterId]: null,
+      [navigatorId]: null,
+      [wranglerId]: null,
+      [lifeSupportId]: null,
+      role: null,
+      roleName: null,
+    }
+  }
 
-  useEffect(() => {
+  state = this.defaultState()
+
+  setHealthOf(role, value) {
+    this.setState({ [role]: value })
+  }
+
+  componentDidMount() {
+    const setState = (...state) => this.setState(...state)
+    const setHealthOf = (role, value) => this.setHealthOf(role, value)
+
     const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer); 
     client.joinOrCreate("feral-hog-distribution").then(room => {
-      setRoom(room)
+      setState({ room })
 
       // set player role and name
-      room.state.zones.onChange = function(zones, sessionId) {
-        if (zones.clientId === sessionId) {
-          setRoleId(zones.id)
-          setPlayerRole(zones.name)
-        }
+      room.state.zones.onChange = function(zone, sessionId) {
+        if (zone.clientId === sessionId)
+          setState({ role: zone.id, roleName: zone.name })
       }
 
-      // Updating the states of each station
-      room.state.booster.onChange = function (updates) {
-        updateHealthWithValue(updates, (value) => setBoosterHealth(value))
+      room.state.booster.onChange = (updates) => {
+        updateHealthWithValue(updates, (value) => setHealthOf(boosterId, value))
       }
 
       room.state.navigator.onChange = function (updates) {
-        updateHealthWithValue(updates, (value) => up(value))
+        updateHealthWithValue(updates, (value) => setHealthOf(navigatorId, value))
       }
+
       room.state.wrangler.onChange = function (updates) {
-        updateHealthWithValue(updates, (value) => setBoosterHealth(value))
+        updateHealthWithValue(updates, (value) => setHealthOf(wranglerId, value))
       }
+
       room.state.lifeSupport.onChange = function (updates) {
-        updateHealthWithValue(updates, (value) => setBoosterHealth(value))
+        updateHealthWithValue(updates, (value) => setHealthOf(lifeSupportId, value))
       }
-    });
-  }, [])
-
-  function updateBoosterHealth(value = 2) {
-    room.send({ command: boosterId, value: value });
+    })
   }
 
-  function updateNavigatorHealth(value = 2) {
-    room.send({ command: navigatorId, value: value });
+  updateBoosterHealth(value = 2) {
+    this.state.room.send({ command: boosterId, value: value });
   }
 
-  function updateWranglerHealth(value = 2) {
-    room.send({ command: wranglerId, value: value });
+  updateNavigatorHealth(value = 2) {
+    this.state.room.send({ command: navigatorId, value: value });
   }
 
-  function updateLifeSupportHealth(value = 2) {
-    room.send({ command: lifeSupportId, value: value });
+  updateWranglerHealth(value = 2) {
+    this.state.room.send({ command: wranglerId, value: value });
+  }
+
+  updateLifeSupportHealth(value = 2) {
+    this.state.room.send({ command: lifeSupportId, value: value });
+  }
+
+  yourHealth() {
+    return this.state[this.state.role]
   }
   // function helpNavigator() {
   //   room.send({ command: 'navigator', value: 2 });
@@ -77,14 +96,17 @@ export default function Game() {
   // }
 
   // Role select?
-  return (
-    <div id="game">
-      <p>You are: {playersRole}</p>
-      <p>Booster: {boosterHealth}</p>
-      <button onClick={() => updateBoosterHealth()}>Boost</button>
-      <div>
-        <Range onValueChange={updateBoosterHealth} />
+  render() {
+    const { roleName } = this.state
+    return (
+      <div id="game">
+        <p>You are: {roleName}</p>
+        <p>Your health: {this.yourHealth()}</p>
+        {/* <button onClick={() => updateBoosterHealth()}>Boost</button>
+        <div>
+          <Range onValueChange={updateBoosterHealth} />
+        </div> */}
       </div>
-    </div>
-  )
+    )
+  }
 }
