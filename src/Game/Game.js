@@ -51,7 +51,7 @@ export default class Game extends React.Component {
   componentDidMount() {
     const setState = (...state) => this.setState(...state)
 
-    const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer); 
+    const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer);
     client.joinOrCreate("feral-hog-distribution").then(room => {
       setState({ room })
 
@@ -83,15 +83,26 @@ export default class Game extends React.Component {
     return booster.boops + navigator.boops + wrangler.boops + lifeSupport.boops
   }
 
+  yourScore(role_id) {
+    const { booster, navigator, wrangler, lifeSupport } = this.state
+    if (this.totalBoops() > 0) {
+        const result = this.state[role_id].boops/this.totalBoops()*100
+        return result.toFixed(0)
+    }
+    else {
+      return 0
+    }
+  }
+
   renderScreen() {
     const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport } = this.state
     if (betweenRounds) {
       return (
-        <ScoreScreen 
-          habitatorScore={lifeSupport.boops}
-          boosterScore={booster.boops}
-          wranglerScore={wrangler.boops}
-          navigatorScore={navigator.boops}
+        <ScoreScreen
+          habitatorScore={this.yourScore('lifeSupport')}
+          boosterScore={this.yourScore('booster')}
+          wranglerScore={this.yourScore('wrangler')}
+          navigatorScore={this.yourScore('navigator')}
           onNextRoundClick={this.nextRound}
         />
       )
