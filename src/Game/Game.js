@@ -8,6 +8,7 @@ import { LocalServer, ProductionServer, lifeSupport, navigator, wrangler, booste
 import Boop from '../Boop/Boop'
 import RoleDescription from "../RoleDescription";
 import ScoreScreen from "../ScoreScreen";
+import Header from "../Header";
 
 export default class Game extends React.Component {
   defaultRoleShape = () => {
@@ -111,6 +112,7 @@ export default class Game extends React.Component {
   render() {
     return (
       <>
+        <Header />
         {this.renderScreen()}
       </>
     )
