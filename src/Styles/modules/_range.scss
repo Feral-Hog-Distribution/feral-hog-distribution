@@ -1,8 +1,8 @@
 #module_range {
-  height: 100vh;
+  height: 80vh;
 
   .row {
-    height: 100vh;
+    height: 80vh;
   }
 
   .column {
@@ -29,6 +29,14 @@
   /* background-color: white; */
   width: 100%;
   margin: auto;
+
+  .green_zone {
+    height: 20px;
+    width: 100%;
+    background-color: green;
+    z-index: 10;
+    position: absolute;
+  }
 
   input {
     position: absolute;

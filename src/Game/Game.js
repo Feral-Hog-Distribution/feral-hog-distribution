@@ -54,7 +54,9 @@ export default function Game() {
     <div id="game">
       <p>Booster: {booster}</p>
       <button onClick={updateBoosterHealth}>Boost</button>
-      <Range onValueChange={updateBoosterHealth} />
+      <div>
+        <Range onValueChange={updateBoosterHealth} />
+      </div>
     </div>
   )
 }
