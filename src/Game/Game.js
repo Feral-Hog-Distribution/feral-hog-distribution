@@ -68,6 +68,11 @@ export default class Game extends React.Component {
     return this.state[this.state.role]
   }
 
+  totalHealth() {
+    const { booster, navigator, wrangler, lifeSupport } = this.state
+    return booster + navigator + wrangler + lifeSupport
+  }
+
   // Role select?
   render() {
     const { role, roleName, stage } = this.state
@@ -77,6 +82,7 @@ export default class Game extends React.Component {
         { 
           !won && <>
             <p>You are on stage: {stage}</p>
+            <p>Your team has performed {this.totalHealth()} boops</p>
             <p>You are: {roleName}</p>
             <p>Your have {this.yourHealth()} boops</p>
             <Boop onBoop={(value) => this.updateHealthOf(role, value)} />
