@@ -1,37 +1,52 @@
 import React, { useState, useEffect } from 'react'
 
-export default function Range({ onValueChange }) {
-  const [value, setValue] = useState(50)
-  const [greenZone, setGreenZone] = useState(50)
-  const [gameLoop, setGameLoop] = useState(null)
-
-  function getGreenZone() { return greenZone }
-
-  useEffect(() => {
-    if (gameLoop) {
-      window.clearInterval(gameLoop)
-      setGameLoop(null)
-    } else {
-      setGameLoop(window.setInterval(function () {
-        let updatedGreenZone = getGreenZone() + Math.random() * 10
-        setGreenZone(updatedGreenZone)
-      }, 1000))
+export default class Range extends React.Component {
+  defaultState = () => {
+    return {
+      greenZone: 50,
+      currentValue: 50,
+      gameLoop: null,
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }
 
-  return (
-    <form id="module_range" className="module" action="#ranged">
-      <div className="row">
-        <div className="column">
-          <button type="button" onClick={() => setValue(value-1)}>UP</button>
-          <div className="range_container">
-            <div className="green_zone" style={ { top: `${greenZone}%` } } />
-            <input className="field_range" type="range" min="0" max="100" value={value} />
+  state = this.defaultState()
+
+  tweakGreenZone() {
+    let sign = Math.random() > 0.5 ? 1 : -1
+    let updatedGreenZone = this.state.greenZone + (Math.random() * 10 * sign)
+    updatedGreenZone = Math.min(100, updatedGreenZone)
+    updatedGreenZone = Math.max(0, updatedGreenZone)
+    this.setState({ greenZone: updatedGreenZone })
+  }
+
+  componentDidMount() {
+    const gameLoop = window.setInterval(() => this.tweakGreenZone(), 1000)
+    this.setState({ gameLoop })
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.state.gameLoop)
+  }
+
+  setCurrentValue(currentValue) {
+    this.setState({currentValue})
+  }
+
+  render() {
+    const { greenZone, currentValue } = this.state
+    return (
+      <form id="module_range" className="module" action="#ranged">
+        <div className="row">
+          <div className="column">
+            <button type="button" onClick={() => this.setCurrentValue(currentValue-1)}>UP</button>
+            <div className="range_container">
+              <div className="green_zone" style={ { top: `${greenZone}%` } } />
+              <input className="field_range" type="range" min="0" max="100" value={currentValue} />
+            </div>
+            <button type="button" onClick={() => this.setCurrentValue(currentValue+1)}>DOWN</button>
           </div>
-          <button type="button" onClick={() => setValue(value+1)}>DOWN</button>
         </div>
-      </div>
-    </form>
-  )
+      </form>
+    )
+  }
 }
