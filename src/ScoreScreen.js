@@ -23,7 +23,7 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
       </dl>
       <h2>CASH</h2>
       <p>$165,987,000</p>
-      <button onClick={onNextRoundClick}>Next round!!!!</button>
+      <p><button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button></p>
     </main>
   )
 }
