@@ -52,7 +52,6 @@ export default class Game extends React.Component {
       }
 
       room.state.onChange = (updates) => {
-        console.log(updates)
         const value = findValue(updates, "stage")
         if (!value) return
         setState({ stage: value })
