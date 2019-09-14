@@ -84,27 +84,26 @@ export default class Game extends React.Component {
     return booster.boops + navigator.boops + wrangler.boops + lifeSupport.boops
   }
 
-  yourScore(role_id) {
-    const { booster, navigator, wrangler, lifeSupport } = this.state
-    if (this.totalBoops() > 0) {
-        const result = this.state[role_id].boops/this.totalBoops()*100
-        return result.toFixed(0)
-    }
-    else {
-      return 0
-    }
+  getRole(roleId) {
+    return this.state[roleId]
+  }
+
+  yourScore(roleId) {
+    if (this.totalBoops() === 0) return "0"
+
+    return (this.getRole(roleId).boops/this.totalBoops()*100).toFixed(0)
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport, secondsForLastRound } = this.state
+    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound } = this.state
     if (betweenRounds) {
       return (
         <ScoreScreen
           secondsForRound={secondsForLastRound}
-          habitatorScore={this.yourScore('lifeSupport')}
-          boosterScore={this.yourScore('booster')}
-          wranglerScore={this.yourScore('wrangler')}
-          navigatorScore={this.yourScore('navigator')}
+          habitatorScore={this.yourScore(lifeSupport)}
+          boosterScore={this.yourScore(booster)}
+          wranglerScore={this.yourScore(wrangler)}
+          navigatorScore={this.yourScore(navigator)}
           onNextRoundClick={this.nextRound}
         />
       )
