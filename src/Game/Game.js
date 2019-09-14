@@ -7,6 +7,7 @@ import { LocalServer, ProductionServer, lifeSupport, navigator, wrangler, booste
 
 import Boop from '../Boop/Boop'
 import RoleDescription from "../RoleDescription";
+import ScoreScreen from "../ScoreScreen";
 
 export default class Game extends React.Component {
   defaultRoleShape = () => {
@@ -82,14 +83,16 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired } = this.state
+    const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport } = this.state
     if (betweenRounds) {
       return (
-        <>
-          <h1>YOU WIN!</h1>
-          <button onClick={this.nextRound}>Next round!</button>
-          <button onClick={this.resetGame}>Reset</button>
-        </>
+        <ScoreScreen 
+          habitatorScore={lifeSupport.boops}
+          boosterScore={booster.boops}
+          wranglerScore={wrangler.boops}
+          navigatorScore={navigator.boops}
+          onNextRoundClick={this.nextRound}
+        />
       )
     } else {
       return (
