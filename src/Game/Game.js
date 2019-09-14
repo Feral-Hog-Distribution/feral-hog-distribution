@@ -27,6 +27,8 @@ export default class Game extends React.Component {
       stage: null,
       roleId: null,
       roleName: null,
+      betweenRounds: null,
+      totalBoopsRequired: null,
     }
   }
 
@@ -38,6 +40,10 @@ export default class Game extends React.Component {
 
   resetGame = () => {
     this.state.room.send({ command: "resetGame" })
+  }
+
+  nextRound = () => {
+    this.state.room.send({ command: "nextRound" })
   }
 
   componentDidMount() {
@@ -76,23 +82,24 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { roleId, stage } = this.state
-    const won = stage > 0
-    if (!won) {
+    const { roleId, stage, betweenRounds, totalBoopsRequired } = this.state
+    if (betweenRounds) {
+      return (
+        <>
+          <h1>YOU WIN!</h1>
+          <button onClick={this.nextRound}>Next round!</button>
+          <button onClick={this.resetGame}>Reset</button>
+        </>
+      )
+    } else {
       return (
         <RoleDescription roleId={roleId} >
           <p>You are on stage: {stage}</p>
           <p>Your team has performed {this.totalBoops()} boops</p>
-          <p>You have {this.yourBoops()} boops</p>
+          <p>You want to reach {totalBoopsRequired} boops</p>
+          {/* <p>You have {this.yourBoops()} boops</p> */}
           <Boop onBoop={(value) => this.updateBoops(value)} />
         </RoleDescription>
-      )
-    } else {
-      return (
-        <>
-          <h1>YOU WIN!</h1>
-          <button onClick={this.resetGame}>Reset</button>
-        </>
       )
     }
   }
