@@ -4,7 +4,7 @@ import React from 'react'
 import './Game.scss'
 
 import { LocalServer, ProductionServer } from "../Constants"
-import { updateHealthWithValue } from '../Helpers'
+import { updateHealthWithValue, findValue } from '../Helpers'
 
 import Boop from '../Boop/Boop'
 
@@ -21,6 +21,7 @@ export default class Game extends React.Component {
       [navigatorId]: null,
       [wranglerId]: null,
       [lifeSupportId]: null,
+      stage: null,
       role: null,
       roleName: null,
     }
@@ -50,6 +51,13 @@ export default class Game extends React.Component {
           setState({ role: zone.id, roleName: zone.name })
       }
 
+      room.state.onChange = (updates) => {
+        console.log(updates)
+        const value = findValue(updates, "stage")
+        if (!value) return
+        setState({ stage: value })
+      }
+
       room.state.booster.onChange = (updates) => {
         updateHealthWithValue(updates, (value) => setHealthOf(boosterId, value))
       }
@@ -74,12 +82,23 @@ export default class Game extends React.Component {
 
   // Role select?
   render() {
-    const { role, roleName } = this.state
+    const { role, roleName, stage } = this.state
+    const won = stage > 0
     return (
       <div id="game">
-        <p>You are: {roleName}</p>
-        <p>Your health: {this.yourHealth()}</p>
-        <Boop onBoop={(value) => this.updateHealthOf(role, value)} />
+        { 
+          !won && <>
+            <p>You are on stage: {stage}</p>
+            <p>You are: {roleName}</p>
+            <p>Your have {this.yourHealth()} boops</p>
+            <Boop onBoop={(value) => this.updateHealthOf(role, value)} />
+          </>
+        }
+        {
+          won && <>
+          <h1>YOU WIN!</h1>
+          </>
+        }
       </div>
     )
   }
