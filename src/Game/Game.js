@@ -85,10 +85,11 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport } = this.state
+    const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport, secondsForLastRound } = this.state
     if (betweenRounds) {
       return (
-        <ScoreScreen 
+        <ScoreScreen
+          secondsForRound={secondsForLastRound}
           habitatorScore={lifeSupport.boops}
           boosterScore={booster.boops}
           wranglerScore={wrangler.boops}

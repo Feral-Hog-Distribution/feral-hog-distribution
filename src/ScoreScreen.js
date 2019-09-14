@@ -1,11 +1,15 @@
 import React from 'react'
 
-export default function ScoreScreen({ boosterScore, habitatorScore, navigatorScore, wranglerScore, onNextRoundClick }) {
+export default function ScoreScreen({ boosterScore, habitatorScore, navigatorScore, wranglerScore, secondsForRound, onNextRoundClick }) {
+  const minutes = (secondsForRound / 60).toFixed(0)
+  let seconds = (secondsForRound % 60).toFixed(0)
+  if (seconds.length === 1) seconds = "0" + seconds
+
   return (
     <main id="screen_score">
       <dl className="list_score">
         <dt>Time</dt>
-        <dd>1:33</dd>
+        <dd>{minutes}:{seconds}</dd>
       </dl>
       <dl className="list_score">
         <dt>Navigator</dt>
