@@ -6,7 +6,7 @@ import './Game.scss'
 import { LocalServer, ProductionServer } from "../Constants"
 import { updateHealthWithValue } from '../Helpers'
 
-import Range from '../Range/Range'
+import Boop from '../Boop/Boop'
 
 const boosterId = "booster"
 const navigatorId = "navigator"
@@ -30,6 +30,10 @@ export default class Game extends React.Component {
 
   setHealthOf(role, value) {
     this.setState({ [role]: value })
+  }
+
+  updateHealthOf(roleId, value) {
+    this.state.room.send({ command: roleId, value: value });
   }
 
   componentDidMount() {
@@ -64,48 +68,18 @@ export default class Game extends React.Component {
     })
   }
 
-  updateBoosterHealth(value = 2) {
-    this.state.room.send({ command: boosterId, value: value });
-  }
-
-  updateNavigatorHealth(value = 2) {
-    this.state.room.send({ command: navigatorId, value: value });
-  }
-
-  updateWranglerHealth(value = 2) {
-    this.state.room.send({ command: wranglerId, value: value });
-  }
-
-  updateLifeSupportHealth(value = 2) {
-    this.state.room.send({ command: lifeSupportId, value: value });
-  }
-
   yourHealth() {
     return this.state[this.state.role]
   }
-  // function helpNavigator() {
-  //   room.send({ command: 'navigator', value: 2 });
-  // }
-
-  // function helpWrangler() {
-  //   room.send({ command: 'wrangler', value: 2 });
-  // }
-
-  // function helpLifeSupport() {
-  //   room.send({ command: 'lifeSupport', value: 2 });
-  // }
 
   // Role select?
   render() {
-    const { roleName } = this.state
+    const { role, roleName } = this.state
     return (
       <div id="game">
         <p>You are: {roleName}</p>
         <p>Your health: {this.yourHealth()}</p>
-        {/* <button onClick={() => updateBoosterHealth()}>Boost</button>
-        <div>
-          <Range onValueChange={updateBoosterHealth} />
-        </div> */}
+        <Boop onBoop={(value) => this.updateHealthOf(role, value)} />
       </div>
     )
   }
