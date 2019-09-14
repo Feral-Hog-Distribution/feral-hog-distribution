@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/feral-hog-distribution/static/css/main.2cce8147.chunk.css",
-    "main.js": "/feral-hog-distribution/static/js/main.fde021af.chunk.js",
-    "main.js.map": "/feral-hog-distribution/static/js/main.fde021af.chunk.js.map",
+    "main.css": "/feral-hog-distribution/static/css/main.af08954f.chunk.css",
+    "main.js": "/feral-hog-distribution/static/js/main.96562d12.chunk.js",
+    "main.js.map": "/feral-hog-distribution/static/js/main.96562d12.chunk.js.map",
     "runtime~main.js": "/feral-hog-distribution/static/js/runtime~main.fe5fbbe4.js",
     "runtime~main.js.map": "/feral-hog-distribution/static/js/runtime~main.fe5fbbe4.js.map",
-    "static/js/2.77f317fe.chunk.js": "/feral-hog-distribution/static/js/2.77f317fe.chunk.js",
-    "static/js/2.77f317fe.chunk.js.map": "/feral-hog-distribution/static/js/2.77f317fe.chunk.js.map",
+    "static/js/2.08a2c4ee.chunk.js": "/feral-hog-distribution/static/js/2.08a2c4ee.chunk.js",
+    "static/js/2.08a2c4ee.chunk.js.map": "/feral-hog-distribution/static/js/2.08a2c4ee.chunk.js.map",
     "index.html": "/feral-hog-distribution/index.html",
-    "precache-manifest.4b9d2ce56a91f252ca2816a465ff46ef.js": "/feral-hog-distribution/precache-manifest.4b9d2ce56a91f252ca2816a465ff46ef.js",
+    "precache-manifest.7df3996f78acaa00a40a05250a957832.js": "/feral-hog-distribution/precache-manifest.7df3996f78acaa00a40a05250a957832.js",
     "service-worker.js": "/feral-hog-distribution/service-worker.js",
-    "static/css/main.2cce8147.chunk.css.map": "/feral-hog-distribution/static/css/main.2cce8147.chunk.css.map",
-    "static/media/logo.svg": "/feral-hog-distribution/static/media/logo.5d5d9eef.svg"
+    "static/css/main.af08954f.chunk.css.map": "/feral-hog-distribution/static/css/main.af08954f.chunk.css.map"
   }
 }
