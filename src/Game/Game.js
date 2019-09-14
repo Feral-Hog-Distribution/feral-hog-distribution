@@ -31,6 +31,7 @@ export default class Game extends React.Component {
       roleName: null,
       betweenRounds: null,
       totalBoopsRequired: null,
+      secondsForLastRound: null,
     }
   }
 
@@ -95,10 +96,11 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport } = this.state
+    const { roleId, stage, betweenRounds, totalBoopsRequired, booster, wrangler, navigator, lifeSupport, secondsForLastRound } = this.state
     if (betweenRounds) {
       return (
         <ScoreScreen
+          secondsForRound={secondsForLastRound}
           habitatorScore={this.yourScore('lifeSupport')}
           boosterScore={this.yourScore('booster')}
           wranglerScore={this.yourScore('wrangler')}
