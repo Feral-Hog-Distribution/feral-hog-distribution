@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import './Styles/client.scss';
 import Game from './Game/Game';
 import * as serviceWorker from './serviceWorker';
 

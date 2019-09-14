@@ -1,0 +1,18 @@
+#module_multi-range {
+  height: 100vh;
+
+  .row {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .column {
+    flex-grow: 1;
+    flex-basis: 33.33%;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+}
+

@@ -1,0 +1,30 @@
+#module_boop {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+
+  button {
+    display: block;
+    -webkit-appearance: none;
+    border-radius: 100%;
+    border-color: brown;
+    background-color: brown;
+    width: 80vw;
+    height: 80vw;
+    font-size: 10vw;
+    margin: auto;
+    transform: scale(1);
+    transition: transform var(--animation-duration);
+
+    &:active {
+      transform: scale(0.75);
+    }
+
+    &:focus {
+      box-shadow: 0 0 20px green;
+    }
+  }
+}
+

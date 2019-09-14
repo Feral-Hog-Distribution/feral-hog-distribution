@@ -1,0 +1,67 @@
+$arrow_width: 3rem;
+$arrow_height: 3rem;
+
+@mixin hide_text() {
+  // If you want to hide the text from an element,
+  // but still keep the element in the layout
+  text-indent: -9999rem;
+  text-align: left;
+  overflow: hidden;
+}
+
+@mixin a11y() {
+  // Often we'll need extra text in the HTML for accessibility
+  // reasons. This mixin will take the affected element out of
+  // the flow of the document so that it's not visible,
+  // but importantly not hide it from screenreaders.
+  // `display: none`, `opacity: 0`, and `visibility: hidden`
+  // are treated as hidden in screenreaders
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+@mixin triangle($direction: 'down', $colour: inherit, $width: $arrow_width, $height: $arrow_height) {
+  // This mixin creates CSS triangles based on the given parameters.
+  // Especially useful in combination with a ::before or ::after pseudo element.
+  height: 0;
+  width: 0;
+  @if ($colour == inherit) {
+    // If the `inherit` keyword is used for the colour of the triangle,
+    // first set the `color` on the element to `inherit`
+    color: inherit;
+    // then reset the `$colour` param to `currentColor`,
+    // thereby inheriting a parent element's `color`
+    $colour: currentColor;
+  }
+  @if ($direction == 'up') {
+    border-top: none;
+    border-right: transparent solid ($width/2);
+    border-bottom: $colour solid $height;
+    border-left: transparent solid ($width/2);
+  }
+  @if ($direction == 'down') {
+    border-top: $colour solid $height;
+    border-right: transparent solid ($width/2);
+    border-bottom: none;
+    border-left: transparent solid ($width/2);
+  }
+  @if ($direction == 'left') {
+    border-top: transparent solid ($height/2);
+    border-right: $colour solid $width;
+    border-bottom: transparent solid ($height/2);
+    border-left: none;
+  }
+  @if ($direction == 'right') {
+    border-top: transparent solid ($height/2);
+    border-right: none;
+    border-bottom: transparent solid ($height/2);
+    border-left: $colour solid $width;
+  }
+}

@@ -1,0 +1,13 @@
+%animate_scale {
+  transform: scale(1);
+  transition: transform var(--animation-duration);
+
+  &:active {
+    transform: scale(0.75);
+  }
+}
+
+%circular {
+  display: block;
+  border-radius: 100%;
+}

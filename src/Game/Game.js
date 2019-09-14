@@ -6,6 +6,8 @@ import './Game.scss'
 import { LocalServer, ProductionServer } from "../Constants"
 import { updateHealthWithValue } from '../Helpers'
 
+import Range from '../Range/Range'
+
 export default function Game() {
   const [room, setRoom] = useState(null)
   const [booster, setBoosterHealth] = useState(null)
@@ -31,7 +33,7 @@ export default function Game() {
     });
   }, [])
 
-  function helpBooster(value = 2) {
+  function updateBoosterHealth(value = 2) {
     room.send({ command: 'booster', value });
   }
 
@@ -51,7 +53,8 @@ export default function Game() {
   return (
     <div id="game">
       <p>Booster: {booster}</p>
-      <button onClick={helpBooster}>Boost</button>
+      <button onClick={updateBoosterHealth}>Boost</button>
+      <Range onValueChange={updateBoosterHealth} />
     </div>
   )
 }
