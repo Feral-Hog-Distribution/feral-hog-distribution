@@ -3,39 +3,37 @@ import * as Colyseus from "colyseus.js";
 import React from 'react'
 import './Game.scss'
 
-import { LocalServer, ProductionServer } from "../Constants"
-import { findValue, findHealthForRole } from '../Helpers'
+import { LocalServer, ProductionServer, lifeSupport, navigator, wrangler, booster } from "../Constants"
 
 import Boop from '../Boop/Boop'
-
-const booster = "booster"
-const navigator = "navigator"
-const wrangler = "wrangler"
-const lifeSupport = "lifeSupport"
-
+import RoleDescription from "../RoleDescription";
 
 export default class Game extends React.Component {
+  defaultRoleShape = () => {
+    return {
+      id: null,
+      name: null,
+      boops: 0,
+    }
+  }
+
   defaultState = () => {
     return {
       room: null,
-      [booster]: null,
-      [navigator]: null,
-      [wrangler]: null,
-      [lifeSupport]: null,
+      [booster]: this.defaultRoleShape(),
+      [navigator]: this.defaultRoleShape(),
+      [wrangler]:  this.defaultRoleShape(),
+      [lifeSupport]: this.defaultRoleShape(),
       stage: null,
-      role: null,
+      roleId: null,
       roleName: null,
     }
   }
 
   state = this.defaultState()
 
-  setHealthOf(role, value) {
-    this.setState({ [role]: value })
-  }
-
-  updateHealthOf(roleId, value) {
-    this.state.room.send({ command: roleId, value: value });
+  updateBoops(value = 1) {
+    this.state.room.send({ command: this.state.roleId, value: value });
   }
 
   resetGame = () => {
@@ -51,40 +49,43 @@ export default class Game extends React.Component {
 
       // set player role and name
       room.state.zones.onChange = function(update, sessionId) {
-        if (update.clientId === sessionId) setState({ role: update.id, roleName: update.name })
+        if (update.clientId === sessionId)
+          setState({ roleId: update.id, roleName: update.name })
       }
 
-      room.state.onChange = (updates) => {
-        if (findValue(updates, "stage") != null) setState({ stage: findValue(updates, "stage") })
-        if (findValue(updates, booster) != null) setState({ [booster]: findHealthForRole(updates, booster) })
-        if (findValue(updates, navigator) != null) setState({ [navigator]: findHealthForRole(updates, navigator) })
-        if (findValue(updates, wrangler) != null) setState({ [wrangler]: findHealthForRole(updates, wrangler) })
-        if (findValue(updates, lifeSupport) != null) setState({ [lifeSupport]: findHealthForRole(updates, lifeSupport) })
+      room.state.onChange = (changes) => {
+        const stateChanges = {}
+        changes.forEach(change => {
+          stateChanges[change.field] = change.value
+        });
+        setState(stateChanges)
       }
     })
   }
 
-  yourHealth() {
-    return this.state[this.state.role]
+  yourBoops() {
+    const yourRole = this.state[this.state.roleId]
+    if (!yourRole) return null
+
+    return yourRole.boops
   }
 
-  totalHealth() {
+  totalBoops() {
     const { booster, navigator, wrangler, lifeSupport } = this.state
-    return booster + navigator + wrangler + lifeSupport
+    return booster.boops + navigator.boops + wrangler.boops + lifeSupport.boops
   }
 
   renderScreen() {
-    const { role, roleName, stage } = this.state
+    const { roleId, stage } = this.state
     const won = stage > 0
     if (!won) {
       return (
-        <>
+        <RoleDescription roleId={roleId} >
           <p>You are on stage: {stage}</p>
-          <p>Your team has performed {this.totalHealth()} boops</p>
-          <p>You are: {roleName}</p>
-          <p>Your have {this.yourHealth()} boops</p>
-          <Boop onBoop={(value) => this.updateHealthOf(role, value)} />
-        </>
+          <p>Your team has performed {this.totalBoops()} boops</p>
+          <p>You have {this.yourBoops()} boops</p>
+          <Boop onBoop={(value) => this.updateBoops(value)} />
+        </RoleDescription>
       )
     } else {
       return (
@@ -99,9 +100,9 @@ export default class Game extends React.Component {
   // Role select?
   render() {
     return (
-      <div id="game">
+      <>
         {this.renderScreen()}
-      </div>
+      </>
     )
   }
 }
