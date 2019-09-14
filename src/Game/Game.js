@@ -73,27 +73,34 @@ export default class Game extends React.Component {
     return booster + navigator + wrangler + lifeSupport
   }
 
-  // Role select?
-  render() {
+  renderScreen() {
     const { role, roleName, stage } = this.state
     const won = stage > 0
-    return (
-      <div id="game">
-        { 
-          !won && <>
-            <p>You are on stage: {stage}</p>
-            <p>Your team has performed {this.totalHealth()} boops</p>
-            <p>You are: {roleName}</p>
-            <p>Your have {this.yourHealth()} boops</p>
-            <Boop onBoop={(value) => this.updateHealthOf(role, value)} />
-          </>
-        }
-        {
-          won && <>
+    if (!won) {
+      return (
+        <>
+          <p>You are on stage: {stage}</p>
+          <p>Your team has performed {this.totalHealth()} boops</p>
+          <p>You are: {roleName}</p>
+          <p>Your have {this.yourHealth()} boops</p>
+          <Boop onBoop={(value) => this.updateHealthOf(role, value)} />
+        </>
+      )
+    } else {
+      return (
+        <>
           <h1>YOU WIN!</h1>
           <button onClick={this.resetGame}>Reset</button>
-          </>
-        }
+        </>
+      )
+    }
+  }
+
+  // Role select?
+  render() {
+    return (
+      <div id="game">
+        {this.renderScreen()}
       </div>
     )
   }
