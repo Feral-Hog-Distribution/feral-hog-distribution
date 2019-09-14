@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.2cce8147.chunk.css",
-    "main.js": "/static/js/main.23a018da.chunk.js",
-    "main.js.map": "/static/js/main.23a018da.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.955178ef.js",
-    "runtime~main.js.map": "/static/js/runtime~main.955178ef.js.map",
-    "static/js/2.77f317fe.chunk.js": "/static/js/2.77f317fe.chunk.js",
-    "static/js/2.77f317fe.chunk.js.map": "/static/js/2.77f317fe.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.9ed1462fbd75e476caef7bfe631215f3.js": "/precache-manifest.9ed1462fbd75e476caef7bfe631215f3.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.2cce8147.chunk.css.map": "/static/css/main.2cce8147.chunk.css.map",
-    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg"
+    "main.css": "/feral-hog-distribution/static/css/main.2cce8147.chunk.css",
+    "main.js": "/feral-hog-distribution/static/js/main.fde021af.chunk.js",
+    "main.js.map": "/feral-hog-distribution/static/js/main.fde021af.chunk.js.map",
+    "runtime~main.js": "/feral-hog-distribution/static/js/runtime~main.fe5fbbe4.js",
+    "runtime~main.js.map": "/feral-hog-distribution/static/js/runtime~main.fe5fbbe4.js.map",
+    "static/js/2.77f317fe.chunk.js": "/feral-hog-distribution/static/js/2.77f317fe.chunk.js",
+    "static/js/2.77f317fe.chunk.js.map": "/feral-hog-distribution/static/js/2.77f317fe.chunk.js.map",
+    "index.html": "/feral-hog-distribution/index.html",
+    "precache-manifest.4b9d2ce56a91f252ca2816a465ff46ef.js": "/feral-hog-distribution/precache-manifest.4b9d2ce56a91f252ca2816a465ff46ef.js",
+    "service-worker.js": "/feral-hog-distribution/service-worker.js",
+    "static/css/main.2cce8147.chunk.css.map": "/feral-hog-distribution/static/css/main.2cce8147.chunk.css.map",
+    "static/media/logo.svg": "/feral-hog-distribution/static/media/logo.5d5d9eef.svg"
   }
 }
