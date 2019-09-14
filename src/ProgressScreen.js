@@ -1,11 +1,12 @@
 import React from 'react'
 
-import MagSvg from './Assets/map.svg'
+import Map from './Assets/Map'
 
-export default function ProcessScreen({ currentStage }) {
+export default function ProcessScreen({ currentStage, children }) {
   return (
-    <main id="screen_progress" data-current-stage={currentStage}>
-      <img src={MagSvg} alt={"You are on stage " + currentStage} />
+    <main id="screen_progress" >
+      <Map currentStage={currentStage} />
+      {children}
     </main>
   )
 
