@@ -35,13 +35,13 @@ export default function Game() {
     room.send({ command: 'booster', value });
   }
 
-  function helpNavigator() {
-    room.send({ command: 'navigator', value: 2 });
-  }
+  // function helpNavigator() {
+  //   room.send({ command: 'navigator', value: 2 });
+  // }
 
-  function helpWrangler() {
-    room.send({ command: 'wrangler', value: 2 });
-  }
+  // function helpWrangler() {
+  //   room.send({ command: 'wrangler', value: 2 });
+  // }
 
   // function helpLifeSupport() {
   //   room.send({ command: 'lifeSupport', value: 2 });
