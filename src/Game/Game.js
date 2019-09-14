@@ -4,23 +4,24 @@ import React from 'react'
 import './Game.scss'
 
 import { LocalServer, ProductionServer } from "../Constants"
-import { updateHealthWithValue, findValue } from '../Helpers'
+import { findValue, findHealthForRole } from '../Helpers'
 
 import Boop from '../Boop/Boop'
 
-const boosterId = "booster"
-const navigatorId = "navigator"
-const wranglerId = "wrangler"
-const lifeSupportId = "lifeSupport"
+const booster = "booster"
+const navigator = "navigator"
+const wrangler = "wrangler"
+const lifeSupport = "lifeSupport"
+
 
 export default class Game extends React.Component {
   defaultState = () => {
     return {
       room: null,
-      [boosterId]: null,
-      [navigatorId]: null,
-      [wranglerId]: null,
-      [lifeSupportId]: null,
+      [booster]: null,
+      [navigator]: null,
+      [wrangler]: null,
+      [lifeSupport]: null,
       stage: null,
       role: null,
       roleName: null,
@@ -37,6 +38,10 @@ export default class Game extends React.Component {
     this.state.room.send({ command: roleId, value: value });
   }
 
+  resetGame = () => {
+    this.state.room.send({ command: "resetGame" })
+  }
+
   componentDidMount() {
     const setState = (...state) => this.setState(...state)
     const setHealthOf = (role, value) => this.setHealthOf(role, value)
@@ -46,31 +51,16 @@ export default class Game extends React.Component {
       setState({ room })
 
       // set player role and name
-      room.state.zones.onChange = function(zone, sessionId) {
-        if (zone.clientId === sessionId)
-          setState({ role: zone.id, roleName: zone.name })
+      room.state.zones.onChange = function(update, sessionId) {
+        if (update.clientId === sessionId) setState({ role: update.id, roleName: update.name })
       }
 
       room.state.onChange = (updates) => {
-        const value = findValue(updates, "stage")
-        if (!value) return
-        setState({ stage: value })
-      }
-
-      room.state.booster.onChange = (updates) => {
-        updateHealthWithValue(updates, (value) => setHealthOf(boosterId, value))
-      }
-
-      room.state.navigator.onChange = function (updates) {
-        updateHealthWithValue(updates, (value) => setHealthOf(navigatorId, value))
-      }
-
-      room.state.wrangler.onChange = function (updates) {
-        updateHealthWithValue(updates, (value) => setHealthOf(wranglerId, value))
-      }
-
-      room.state.lifeSupport.onChange = function (updates) {
-        updateHealthWithValue(updates, (value) => setHealthOf(lifeSupportId, value))
+        if (findValue(updates, "stage") != null) setState({ stage: findValue(updates, "stage") })
+        if (findValue(updates, booster) != null) setState({ [booster]: findHealthForRole(updates, booster) })
+        if (findValue(updates, navigator) != null) setState({ [navigator]: findHealthForRole(updates, navigator) })
+        if (findValue(updates, wrangler) != null) setState({ [wrangler]: findHealthForRole(updates, wrangler) })
+        if (findValue(updates, lifeSupport) != null) setState({ [lifeSupport]: findHealthForRole(updates, lifeSupport) })
       }
     })
   }
@@ -96,6 +86,7 @@ export default class Game extends React.Component {
         {
           won && <>
           <h1>YOU WIN!</h1>
+          <button onClick={this.resetGame}>Reset</button>
           </>
         }
       </div>
