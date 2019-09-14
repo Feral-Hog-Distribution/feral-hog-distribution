@@ -26,23 +26,47 @@ button.circular {
 }
 
 button.arrow {
+  position: relative;
   color: var(--pink);
 
+  &::before,
   &::after {
     content: '';
     display: block;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: calc( var(--button-dimension) / -2);
+    margin-left: calc( var(--button-dimension) / -2);
   }
 
+  &::before {
+    top: 57.5%;
+  }
+
+  &[data-direction="n"]::before {
+    @include triangle('up', var(--dark-pink));
+  }
   &[data-direction="n"]::after {
     @include triangle('up');
+  }
+
+  &[data-direction="e"]::before {
+    @include triangle('right', var(--dark-pink));
   }
   &[data-direction="e"]::after {
     @include triangle('right');
   }
+
+  &[data-direction="s"]::before {
+    @include triangle('down', var(--dark-pink));
+  }
   &[data-direction="s"]::after {
     @include triangle('down');
+  }
+
+  &[data-direction="w"]::before {
+    @include triangle('left', var(--dark-pink));
   }
   &[data-direction="w"]::after {
     @include triangle('left');

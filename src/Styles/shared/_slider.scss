@@ -12,6 +12,7 @@
 
 .slider {
   position: relative;
+  box-sizing: content-box;
 
   &.horizontal {
     height: var(--button-dimension);
@@ -119,3 +120,23 @@
     }
   }
 }
+
+.slider.horizontal.interactive[data-counter="after"] {
+  padding-bottom: var(--button-dimension);
+
+  .slider_counter {
+    flex-direction: row;
+  }
+}
+
+.slider.vertical.interactive[data-counter="after"] {
+  padding-right: var(--button-dimension);
+
+  .slider_counter {
+    flex-direction: column-reverse;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+

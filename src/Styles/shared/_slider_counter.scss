@@ -1,0 +1,16 @@
+.slider_counter {
+  list-style: none;
+  color: var(--blue);
+  display: flex;
+
+  li {
+    flex: auto;
+    display: block;
+    width: var(--button-dimension);
+    height: var(--button-dimension);
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: var(--button-dimension);
+    text-align: center;
+  }
+}
