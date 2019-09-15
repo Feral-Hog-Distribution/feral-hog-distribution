@@ -9,7 +9,6 @@ export default class Boop extends React.Component {
           <button onClick={() => this.boopIt()} type="button" className="text" name="input">Snoot</button>
           <div id="chonk">Chonk</div>
         </form>
-        <h3 style={{textAlign: 'center', marginTop: '16em'}}>Boop that snoot!!</h3>
       </>
     )
   }
