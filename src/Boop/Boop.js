@@ -13,10 +13,10 @@ export default class Boop extends React.Component {
 
   boopIt = () => {
     this.props.onBoop(1);
-    console.log("its a boopy doop");
     var element = document.getElementById("chonk");
     if(element){
       element.classList.add("booped");
+      clearTimeout(timer);
       timer = setTimeout(this.chonkSad, 700);
     }
   }
