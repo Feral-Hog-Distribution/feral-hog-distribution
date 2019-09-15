@@ -37,7 +37,8 @@ export default class Game extends React.Component {
       multiplier: 100,
       cashFromRound: 0,
       totalCash: 0,
-      viewer: true
+      viewer: true,
+      currentBoopsThisRound: 0,
     }
   }
 
@@ -105,11 +106,11 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, totalCash, cashFromRound, viewer } = this.state
+    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, totalCash, cashFromRound, viewer, currentBoopsThisRound } = this.state
     if (viewer) {
       return (
         <ProcessScreen currentStage={stage-1}>
-          <p>Your team has performed {this.totalBoops()} boops</p>
+          <p>Your team has performed {currentBoopsThisRound} boops</p>
           <p>You want to reach {totalBoopsRequired} boops</p>
         </ProcessScreen>
       )
@@ -130,7 +131,7 @@ export default class Game extends React.Component {
     } else {
       return (
         <RoleDescription roleId={roleId} >
-          <p>Your team has performed {this.totalBoops()} boops</p>
+          <p>Your team has performed {currentBoopsThisRound} boops</p>
           <p>You want to reach {totalBoopsRequired} boops</p>
           {/* <p>You have {this.yourBoops()} boops</p> */}
           <Boop onBoop={(value) => this.updateBoops(value)} />
