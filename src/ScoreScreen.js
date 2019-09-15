@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ScoreScreen({ boosterScore, habitatorScore, navigatorScore, wranglerScore, secondsForRound, onNextRoundClick, cash }) {
+export default function ScoreScreen({ boosterScore, habitatorScore, navigatorScore, wranglerScore, secondsForRound, onNextRoundClick, cash, additionalCash }) {
   const minutes = (secondsForRound / 60).toFixed(0)
   let seconds = (secondsForRound % 60).toFixed(0)
   if (seconds.length === 1) seconds = "0" + seconds
@@ -21,9 +21,9 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
         <dt>Habitator</dt>
         <dd className="percent">{habitatorScore}</dd>
       </dl>
-      <h2>CASH</h2>
-      <p>${cash}</p>
-      <button onClick={onNextRoundClick}>Next round!!!!</button>
+      <h2 className="text">+${additionalCash}</h2>
+      <h2 className="text">${cash}</h2>
+      <p><button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button></p>
     </main>
   )
 }
