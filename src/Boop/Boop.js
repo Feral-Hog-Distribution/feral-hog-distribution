@@ -1,4 +1,5 @@
 import React from 'react'
+var timer = null;
 
 export default class Boop extends React.Component {
   render() {
@@ -16,7 +17,7 @@ export default class Boop extends React.Component {
     var element = document.getElementById("chonk");
     if(element){
       element.classList.add("booped");
-      setTimeout(this.chonkSad, 700)
+      timer = setTimeout(this.chonkSad, 700);
     }
   }
 
