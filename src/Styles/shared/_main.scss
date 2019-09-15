@@ -1,5 +1,7 @@
 main {
   width: 100vw;
+  max-width: var(--max-width);
+  margin: 0 auto;
   height: 100vh;
   background-color: var(--black);
   color: var(--white);

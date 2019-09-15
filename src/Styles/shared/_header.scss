@@ -1,4 +1,6 @@
 body > header {
+  max-width: var(--max-width);
+  margin: 0 auto;
   background-color: var(--black);
   text-align: right;
 
