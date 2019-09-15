@@ -42,8 +42,6 @@ export default class Game extends React.Component {
   state = this.defaultState()
 
   updateBoops(value = 1) {
-    console.log("updating boops")
-    console.log(value)
     this.state.room.send({ command: this.state.roleId, value: value });
   }
 
