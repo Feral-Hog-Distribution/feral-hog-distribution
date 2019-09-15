@@ -87,6 +87,16 @@ export default class Game extends React.Component {
     return booster.boops + navigator.boops + wrangler.boops + lifeSupport.boops
   }
 
+  getRole(roleId) {
+    return this.state[roleId]
+  }
+
+  yourScore(roleId) {
+    if (this.totalBoops() === 0) return "0"
+
+    return (this.getRole(roleId).boops/this.totalBoops()*100).toFixed(0)
+  }
+
   renderScreen() {
     const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, cash, additionalCash } = this.state
     if (betweenRounds) {
@@ -99,6 +109,7 @@ export default class Game extends React.Component {
           navigatorScore={this.yourScore(navigator)}
           additionalCash={additionalCash}
           cash={cash}
+          currentStage={stage}
           onNextRoundClick={this.nextRound}
         />
       )

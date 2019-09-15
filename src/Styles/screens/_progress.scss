@@ -4,16 +4,95 @@
   100% {stroke-width: 25;}
 }
 
-#screen_progress {
-  circle {
-    fill: var(--yellow);
+#screen_progress {}
 
-    &.active {
-      fill: var(--white);
-      stroke: var(--white);
-      animation-duration: 3s;
-      animation-name: strobe;
-      animation-iteration-count: infinite;
-    }
-  }
+circle {
+  fill: var(--yellow);
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+[data-current-stage="0"] [data-stage="0"],
+[data-current-stage="1"] [data-stage="1"],
+[data-current-stage="2"] [data-stage="2"],
+[data-current-stage="3"] [data-stage="3"],
+[data-current-stage="4"] [data-stage="4"],
+[data-current-stage="5"] [data-stage="5"],
+[data-current-stage="6"] [data-stage="6"],
+[data-current-stage="7"] [data-stage="7"],
+[data-current-stage="8"] [data-stage="8"],
+[data-current-stage="9"] [data-stage="9"],
+[data-current-stage="10"] [data-stage="10"] {
+  fill: var(--white);
+  stroke: var(--white);
+  animation-name: strobe;
+}
+
+[data-current-stage="1"] [data-stage="0"],
+
+[data-current-stage="2"] [data-stage="0"],
+[data-current-stage="2"] [data-stage="1"],
+
+[data-current-stage="3"] [data-stage="0"],
+[data-current-stage="3"] [data-stage="1"],
+[data-current-stage="3"] [data-stage="2"],
+
+[data-current-stage="4"] [data-stage="0"],
+[data-current-stage="4"] [data-stage="1"],
+[data-current-stage="4"] [data-stage="2"],
+[data-current-stage="4"] [data-stage="3"],
+
+[data-current-stage="5"] [data-stage="0"],
+[data-current-stage="5"] [data-stage="1"],
+[data-current-stage="5"] [data-stage="2"],
+[data-current-stage="5"] [data-stage="3"],
+[data-current-stage="5"] [data-stage="4"],
+
+[data-current-stage="6"] [data-stage="0"],
+[data-current-stage="6"] [data-stage="1"],
+[data-current-stage="6"] [data-stage="2"],
+[data-current-stage="6"] [data-stage="3"],
+[data-current-stage="6"] [data-stage="4"],
+[data-current-stage="6"] [data-stage="5"],
+
+[data-current-stage="7"] [data-stage="0"],
+[data-current-stage="7"] [data-stage="1"],
+[data-current-stage="7"] [data-stage="2"],
+[data-current-stage="7"] [data-stage="3"],
+[data-current-stage="7"] [data-stage="4"],
+[data-current-stage="7"] [data-stage="5"],
+[data-current-stage="7"] [data-stage="6"],
+
+[data-current-stage="8"] [data-stage="0"],
+[data-current-stage="8"] [data-stage="1"],
+[data-current-stage="8"] [data-stage="2"],
+[data-current-stage="8"] [data-stage="3"],
+[data-current-stage="8"] [data-stage="4"],
+[data-current-stage="8"] [data-stage="5"],
+[data-current-stage="8"] [data-stage="6"],
+[data-current-stage="8"] [data-stage="7"],
+
+[data-current-stage="9"] [data-stage="0"],
+[data-current-stage="9"] [data-stage="1"],
+[data-current-stage="9"] [data-stage="2"],
+[data-current-stage="9"] [data-stage="3"],
+[data-current-stage="9"] [data-stage="4"],
+[data-current-stage="9"] [data-stage="5"],
+[data-current-stage="9"] [data-stage="6"],
+[data-current-stage="9"] [data-stage="7"],
+[data-current-stage="9"] [data-stage="8"],
+
+[data-current-stage="10"] [data-stage="0"],
+[data-current-stage="10"] [data-stage="1"],
+[data-current-stage="10"] [data-stage="2"],
+[data-current-stage="10"] [data-stage="3"],
+[data-current-stage="10"] [data-stage="4"],
+[data-current-stage="10"] [data-stage="5"],
+[data-current-stage="10"] [data-stage="6"],
+[data-current-stage="10"] [data-stage="7"],
+[data-current-stage="10"] [data-stage="8"],
+[data-current-stage="10"] [data-stage="9"] {
+  fill: var(--pink);
+  stroke: var(--pink);
+  stroke-width: 5;
 }
