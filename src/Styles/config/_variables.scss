@@ -19,4 +19,6 @@ html {
   --button-square-height: var(--button-dimension);
   --half-button-square-width: calc(var(--button-square-width) / 2);
   --half-button-square-height: calc(var(--button-square-height) / 2);
+
+  --max-width: 800px;
 }

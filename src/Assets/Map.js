@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Map({ currentStage }) {
   return (
-    <svg data-current-stage={currentStage} viewBox="-20 -20 807 249" xmlns="http://www.w3.org/2000/svg">
+    <svg data-current-stage={currentStage} viewBox="-20 -20 807 300" xmlns="http://www.w3.org/2000/svg">
       <path d="M5,224.5 L122,78 L301.5,127 L262.5,203.5 L449.5,127 L301.5,47.5 L347,4 L427,78 L529.5,16.5 L598,179 L783,152" stroke="#24B3E6" strokeWidth="2" strokeDasharray="8" fill="none"></path>
       <circle data-stage="0" cx="4" cy="225" r="4"></circle>
       <circle data-stage="1" cx="122" cy="78" r="4"></circle>
