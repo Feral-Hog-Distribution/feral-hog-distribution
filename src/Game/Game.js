@@ -109,7 +109,7 @@ export default class Game extends React.Component {
           navigatorScore={this.yourScore(navigator)}
           cashFromRound={cashFromRound}
           totalCash={totalCash}
-          currentStage={stage}
+          currentStage={stage-1}
           onNextRoundClick={this.nextRound}
         />
       )
