@@ -14,7 +14,11 @@ canvas{
   opacity: 0.5;
 }
 
-#screen_progress {}
+#screen_progress {
+  svg {
+    margin-bottom: 1em;
+  }
+}
 
 circle {
   fill: var(--yellow);

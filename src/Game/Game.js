@@ -10,6 +10,7 @@ import Target from '../Target'
 import RoleDescription from "../RoleDescription";
 import ScoreScreen from "../ScoreScreen";
 import Header from "../Header";
+import ProcessScreen from "../ProgressScreen";
 
 export default class Game extends React.Component {
   defaultRoleShape = () => {
@@ -35,7 +36,8 @@ export default class Game extends React.Component {
       secondsForLastRound: null,
       multiplier: 100,
       cashFromRound: 0,
-      totalCash: 0
+      totalCash: 0,
+      viewer: true
     }
   }
 
@@ -56,8 +58,12 @@ export default class Game extends React.Component {
   componentDidMount() {
     const setState = (...state) => this.setState(...state)
 
+    let params = (new URL(document.location)).searchParams;
+    const joinAsViewer = params.has("viewer");
+    this.setState({ viewer: joinAsViewer })
+
     const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer);
-    client.joinOrCreate("feral-hog-distribution").then(room => {
+    client.joinOrCreate("feral-hog-distribution", { joinAsViewer }).then(room => {
       setState({ room })
 
       // set player role and name
@@ -99,8 +105,15 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, totalCash, cashFromRound } = this.state
-    if (betweenRounds) {
+    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, totalCash, cashFromRound, viewer } = this.state
+    if (viewer) {
+      return (
+        <ProcessScreen currentStage={stage-1}>
+          <p>Your team has performed {this.totalBoops()} boops</p>
+          <p>You want to reach {totalBoopsRequired} boops</p>
+        </ProcessScreen>
+      )
+    } else if (betweenRounds) {
       return (
         <ScoreScreen
           secondsForRound={secondsForLastRound}
