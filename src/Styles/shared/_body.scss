@@ -15,3 +15,11 @@ canvas {
   width: 100% !important;
   height: 100% !important;
 }
+
+.heading { 
+  display: block;
+  text-align: center;
+  font-size: 3rem;
+  color: var(--yellow);
+  margin: 0 auto;
+}

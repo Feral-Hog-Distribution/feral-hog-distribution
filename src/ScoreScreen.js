@@ -40,7 +40,7 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
       <p>
         { 
           ready &&
-          <button onClick={() => {}} type="button" className="square" name="input">Waiting on other players</button>
+          <p className="heading">Waiting on other players</p>
         }
         {
           !ready &&
