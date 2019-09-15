@@ -1,12 +1,11 @@
 import * as Colyseus from "colyseus.js";
 
 import React from 'react'
-import './Game.scss'
 
 import { LocalServer, ProductionServer, lifeSupport, navigator, wrangler, booster } from "../Constants"
 
 import Boop from '../Boop/Boop'
-import Target from '../Target'
+import Target from '../Target/Target'
 import RoleDescription from "../RoleDescription";
 import ScoreScreen from "../ScoreScreen";
 import Header from "../Header";
@@ -130,13 +129,14 @@ export default class Game extends React.Component {
       )
     } else {
       return (
-        <RoleDescription roleId={roleId} >
-          <p>Your team has performed {currentBoopsThisRound} boops</p>
-          <p>You want to reach {totalBoopsRequired} boops</p>
-          {/* <p>You have {this.yourBoops()} boops</p> */}
-          <Boop onBoop={(value) => this.updateBoops(value)} />
-          {/* <Target onTargetSuccess={(value) => this.updateBoops(value)} /> */}
-        </RoleDescription>
+        <Target onTargetSuccess={(value) => this.updateBoops(value)} />
+        // <RoleDescription roleId={roleId} >
+        //   <p>Your team has performed {currentBoopsThisRound} boops</p>
+        //   <p>You want to reach {totalBoopsRequired} boops</p>
+        //   {/* <p>You have {this.yourBoops()} boops</p> */}
+        //   {/* <Boop onBoop={(value) => this.updateBoops(value)} /> */}
+          
+        // </RoleDescription>
       )
     }
   }
