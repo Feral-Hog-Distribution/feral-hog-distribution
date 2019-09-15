@@ -112,6 +112,8 @@ export default class Game extends React.Component {
 
   renderScreen() {
     const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, totalCash, cashFromRound, viewer, currentBoopsThisRound } = this.state
+    const role = this.yourRole().readyForNextRound
+    const readyForNextRound = role ? role.readyForNextRound : null
     if (viewer) {
       return (
         <ProcessScreen currentStage={stage-1}>
@@ -131,7 +133,7 @@ export default class Game extends React.Component {
           totalCash={totalCash}
           currentStage={stage-1}
           onNextRoundClick={this.nextRound}
-          ready={this.yourRole().readyForNextRound}
+          ready={readyForNextRound}
         />
       )
     } else {
