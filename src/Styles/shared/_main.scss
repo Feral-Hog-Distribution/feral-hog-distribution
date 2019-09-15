@@ -3,7 +3,8 @@ main {
   max-width: var(--max-width);
   margin: 0 auto;
   height: 100vh;
-  background-color: var(--black);
-  color: var(--white);
+  background: transparent;
+  //color: var(--white);
   padding: 1rem;
+
 }

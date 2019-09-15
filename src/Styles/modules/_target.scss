@@ -1,3 +1,6 @@
+@import "../config/mixins";
+@import "../config/abstractions";
+
 $screen_width: 75vw;
 
 #module_target {
@@ -16,6 +19,7 @@ $screen_width: 75vw;
   padding-right: var(--container-padding-horizontal);
   padding-bottom: var(--container-padding-vertical);
   padding-left: var(--container-padding-horizontal);
+
 
   button {
     position: absolute;
@@ -54,13 +58,26 @@ $screen_width: 75vw;
   right: var(--container-padding-horizontal);
   bottom: var(--container-padding-vertical);
   left: var(--container-padding-horizontal);
+  overflow: hidden;
+}
+
+.target_reticle,
+.target {
+  display: block;
+  width: var(--button-dimension);
+  height: var(--button-dimension);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: calc( var(--button-dimension) / -2 );
+  margin-left: calc( var(--button-dimension) / -2 );
+  transition-property: all;
+  transition-duration: var(--animation-duration);
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .target_reticle {
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  position: absolute;
+  color: var(--white);
 
   &::before,
   &::after {
@@ -69,7 +86,7 @@ $screen_width: 75vw;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--white);
+    background-color: currentColor;
   }
 
   &::before {
@@ -84,11 +101,16 @@ $screen_width: 75vw;
 }
 
 .target {
-  @extend %ring;
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  border-color: var(--yellow);
-  border-style: solid;
-  border-radius: 100%;
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    width: var(--button-dimension);
+    height: var(--button-dimension);
+    border-color: var(--yellow);
+    border-style: solid;
+    border-width: calc(var(--button-dimension) / 4);
+    @extend %ring;
+    transform: scale(1);
+    opacity: 1;
+  }
 }
