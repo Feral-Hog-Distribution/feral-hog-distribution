@@ -1,29 +1,51 @@
 #module_boop {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  position: relative;
+
+  #chonk {
+    font-size: 0;
+    display: block;
+    position: absolute;
+    background-image: url(/img/sad_hog.svg);
+    background-repeat: no-repeat;
+    //position and size
+    top: 0;
+    width: 312px;
+    height: 214px;
+    left: calc(50% - (312px/2));
+
+    &.booped {
+      width: 302px;
+      left: calc(50% - (302px/2));
+      background-image: url(/img/happy_hog.svg);
+    }
+  }
 
   button {
+    //Snoot
     display: block;
     -webkit-appearance: none;
-    border-radius: 100%;
-    border-color: var(--pink);
-    background-color: var(--pink);
-    width: 40vw;
-    height: 40vw;
-    font-size: 10vw;
-    margin: auto;
-    transform: scale(1);
+    font-size: 0;
+    transform: scale(1.1);
     transition: transform var(--animation-duration);
+    background-image: url(/img/snoot.svg);
+    background-repeat: no-repeat;
+    z-index: 2;
+    position: absolute;
+    //position and size
+    width: 78px;
+    height: 71px;
+    top: 121px;
+    left: calc(50% - (78px/2));
 
     &:active {
-      transform: scale(0.90);
-    }
+      transform: scale(1);
+      top: 126px;
 
-    &:focus {
-      box-shadow: 0 0 20px var(--dark-pink);
+      &+ #chonk {
+        width: 302px;
+        left: calc(50% - (302px/2));
+        background-image: url(/img/happy_hog.svg);
+      }
     }
   }
 }
