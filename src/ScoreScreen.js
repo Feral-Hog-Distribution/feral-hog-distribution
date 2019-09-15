@@ -37,9 +37,9 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
         <dt>Total Cash</dt>
         <dd>${totalCash}</dd>
       </dl>
-
-      <p><button onClick={() => setShowProgress(true)} type="button" className="text" name="input">Show Progress</button>
-      <button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button></p>
+      <p>
+        <button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button>
+      </p>
     </main>
   )
 }
