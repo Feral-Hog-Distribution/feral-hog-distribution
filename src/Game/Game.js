@@ -32,7 +32,9 @@ export default class Game extends React.Component {
       betweenRounds: null,
       totalBoopsRequired: null,
       secondsForLastRound: null,
-      multiplier: 100
+      multiplier: 100,
+      additionalCash: 0,
+      cash: 0
     }
   }
 
@@ -73,13 +75,6 @@ export default class Game extends React.Component {
     })
   }
 
-  calcCash() {
-    const { totalBoopsRequired, secondsForLastRound, multiplier} = this.state
-    const targetSpeed = totalBoopsRequired/40
-    const cash = targetSpeed/secondsForLastRound*multiplier
-    return cash.toFixed(0)
-  }
-
   yourBoops() {
     const yourRole = this.state[this.state.roleId]
     if (!yourRole) return null
@@ -103,7 +98,7 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound } = this.state
+    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, cash, additionalCash } = this.state
     if (betweenRounds) {
       return (
         <ScoreScreen
@@ -112,7 +107,8 @@ export default class Game extends React.Component {
           boosterScore={this.yourScore(booster)}
           wranglerScore={this.yourScore(wrangler)}
           navigatorScore={this.yourScore(navigator)}
-          cash={this.calcCash()}
+          additionalCash={additionalCash}
+          cash={cash}
           currentStage={stage}
           onNextRoundClick={this.nextRound}
         />
