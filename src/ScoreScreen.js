@@ -17,6 +17,7 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
 
   return (
     <main id="screen_score">
+      <span class="barnship">Feral hogs distributed!</span>
       <dl className="list_score">
         <dt>Time</dt>
         <dd>{minutes}:{seconds}</dd>
