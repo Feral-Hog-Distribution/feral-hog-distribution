@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/feral-hog-distribution/precache-manifest.ab04a02542148d4a0235ed6930b9a870.js"
+  "/feral-hog-distribution/precache-manifest.fa41197d825c74f3ec02417a27cd16be.js"
 );
 
 self.addEventListener('message', (event) => {
