@@ -116,7 +116,7 @@ export default class Game extends React.Component {
       return (
         <ProcessScreen currentStage={stage-1}>
           <p>As a team, boot that snoot {totalBoopsRequired} times</p>
-          <h2>{totalBoopsRequired - currentBoopsThisRound} to go!!</h2>
+          <h2>Only {totalBoopsRequired - currentBoopsThisRound} to go!!</h2>
         </ProcessScreen>
       )
     } else if (betweenRounds) {
@@ -138,7 +138,7 @@ export default class Game extends React.Component {
       return (
         <RoleDescription roleId={roleId} >
           <p>As a team, boot that snoot {totalBoopsRequired} times</p>
-          <h2>{totalBoopsRequired - currentBoopsThisRound} to go!!</h2>
+          <h2>Only {totalBoopsRequired - currentBoopsThisRound} to go!!</h2>
           {/* <p>You have {this.yourBoops()} boops</p> */}
           <Boop onBoop={(value) => this.updateBoops(value)} />
           {/* <Target onTargetSuccess={(value) => this.updateBoops(value)} /> */}
