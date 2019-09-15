@@ -120,7 +120,6 @@ export default class Game extends React.Component {
     } else {
       return (
         <RoleDescription roleId={roleId} >
-          <p>You are on stage: {stage}</p>
           <p>Your team has performed {this.totalBoops()} boops</p>
           <p>You want to reach {totalBoopsRequired} boops</p>
           {/* <p>You have {this.yourBoops()} boops</p> */}
@@ -130,7 +129,6 @@ export default class Game extends React.Component {
     }
   }
 
-  // Role select?
   render() {
     return (
       <>
