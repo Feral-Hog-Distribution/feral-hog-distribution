@@ -10,7 +10,7 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
   if (showProgress) {
     return (
       <ProcessScreen currentStage={currentStage}>
-        <p><button onClick={() => setShowProgress(false)} type="button" className="text" name="input">Show Scores</button></p>
+        <p><button onClick={() => setShowProgress(false)} type="button" className="square" name="input">Show Scores</button></p>
       </ProcessScreen>
     )
   }
@@ -40,11 +40,11 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
       <p>
         { 
           ready &&
-          <button onClick={() => {}} type="button" className="text" name="input">Waiting on other players</button>
+          <button onClick={() => {}} type="button" className="square" name="input">Waiting on other players</button>
         }
         {
           !ready &&
-          <button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button>
+          <button onClick={onNextRoundClick} type="button" className="square" name="input">Next round</button>
         }
       </p>
     </main>
