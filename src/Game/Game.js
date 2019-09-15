@@ -112,7 +112,7 @@ export default class Game extends React.Component {
 
   renderScreen() {
     const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, totalCash, cashFromRound, viewer, currentBoopsThisRound } = this.state
-    const role = this.yourRole().readyForNextRound
+    const role = this.yourRole()
     const readyForNextRound = role ? role.readyForNextRound : null
     if (viewer) {
       return (
