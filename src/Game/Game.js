@@ -18,6 +18,7 @@ export default class Game extends React.Component {
       id: null,
       name: null,
       boops: 0,
+      readyForNextRound: false
     }
   }
 
@@ -83,6 +84,10 @@ export default class Game extends React.Component {
     })
   }
 
+  yourRole() {
+    return this.state[this.state.roleId]
+  }
+
   yourBoops() {
     const yourRole = this.state[this.state.roleId]
     if (!yourRole) return null
@@ -126,6 +131,7 @@ export default class Game extends React.Component {
           totalCash={totalCash}
           currentStage={stage-1}
           onNextRoundClick={this.nextRound}
+          ready={this.yourRole().readyForNextRound}
         />
       )
     } else {

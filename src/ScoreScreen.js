@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ProcessScreen from './ProgressScreen'
 
-export default function ScoreScreen({ boosterScore, habitatorScore, navigatorScore, wranglerScore, secondsForRound, onNextRoundClick, currentStage, totalCash, cashFromRound }) {
+export default function ScoreScreen({ boosterScore, habitatorScore, navigatorScore, wranglerScore, secondsForRound, onNextRoundClick, currentStage, totalCash, cashFromRound, ready }) {
   const [showProgress, setShowProgress] = useState(false)
   const minutes = (secondsForRound / 60).toFixed(0)
   let seconds = (secondsForRound % 60).toFixed(0)
@@ -38,7 +38,14 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
         <dd>${totalCash}</dd>
       </dl>
       <p>
-        <button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button>
+        { 
+          ready &&
+          <button onClick={() => {}} type="button" className="text" name="input">Waiting on other players</button>
+        }
+        {
+          !ready &&
+          <button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button>
+        }
       </p>
     </main>
   )
