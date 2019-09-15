@@ -6,6 +6,7 @@ import './Game.scss'
 import { LocalServer, ProductionServer, lifeSupport, navigator, wrangler, booster } from "../Constants"
 
 import Boop from '../Boop/Boop'
+import Target from '../Target'
 import RoleDescription from "../RoleDescription";
 import ScoreScreen from "../ScoreScreen";
 import Header from "../Header";
@@ -41,6 +42,8 @@ export default class Game extends React.Component {
   state = this.defaultState()
 
   updateBoops(value = 1) {
+    console.log("updating boops")
+    console.log(value)
     this.state.room.send({ command: this.state.roleId, value: value });
   }
 
@@ -120,6 +123,7 @@ export default class Game extends React.Component {
           <p>You want to reach {totalBoopsRequired} boops</p>
           {/* <p>You have {this.yourBoops()} boops</p> */}
           <Boop onBoop={(value) => this.updateBoops(value)} />
+          {/* <Target onTargetSuccess={(value) => this.updateBoops(value)} /> */}
         </RoleDescription>
       )
     }
