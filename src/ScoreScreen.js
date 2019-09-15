@@ -31,12 +31,15 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
         <dt>Habitator</dt>
         <dd className="percent">{habitatorScore}</dd>
       </dl>
+      <dl className="list_score">
+        <dt>Cash Earned</dt>
+        <dd>+${cashFromRound}</dd>
+        <dt>Total Cash</dt>
+        <dd>${totalCash}</dd>
+      </dl>
 
-      <h2>CASH</h2>
-      <h2 className="text">+${cashFromRound}</h2>
-      <h2 className="text">${totalCash}</h2>
-      <p><button onClick={() => setShowProgress(true)} type="button" className="text" name="input">Show Progress</button></p>
-      <p><button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button></p>
+      <p><button onClick={() => setShowProgress(true)} type="button" className="text" name="input">Show Progress</button>
+      <button onClick={onNextRoundClick} type="button" className="text" name="input">Next round</button></p>
     </main>
   )
 }
