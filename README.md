@@ -1,3 +1,5 @@
+If you want to run this locally, you will need to run it with the [Colyseus Server](https://github.com/Feral-Hog-Distribution/colyseus-server)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
