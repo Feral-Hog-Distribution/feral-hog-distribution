@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ProcessScreen from './ProgressScreen'
 
-export default function ScoreScreen({ boosterScore, habitatorScore, navigatorScore, wranglerScore, secondsForRound, onNextRoundClick, currentStage, totalCash, cashFromRound, ready }) {
+export default function ScoreScreen({ scores, secondsForRound, onNextRoundClick, currentStage, totalCash, cashFromRound, ready }) {
   const [showProgress, setShowProgress] = useState(false)
   const minutes = (secondsForRound / 60).toFixed(0)
   let seconds = (secondsForRound % 60).toFixed(0)
@@ -23,14 +23,14 @@ export default function ScoreScreen({ boosterScore, habitatorScore, navigatorSco
         <dd>{minutes}:{seconds}</dd>
       </dl>
       <dl className="list_score">
-        <dt>Navigator</dt>
-        <dd className="percent">{navigatorScore}</dd>
-        <dt>Wrangler</dt>
-        <dd className="percent">{wranglerScore}</dd>
-        <dt>Booster</dt>
-        <dd className="percent">{boosterScore}</dd>
-        <dt>Habitator</dt>
-        <dd className="percent">{habitatorScore}</dd>
+        {scores.map((score) => {
+          return (
+            <React.Fragment key={score.name}>
+              <dt>{score.name}</dt>
+              <dd className="percent">{score.score}</dd>
+            </React.Fragment>
+          )
+        })}
       </dl>
       <dl className="list_score">
         <dt>Cash Earned</dt>

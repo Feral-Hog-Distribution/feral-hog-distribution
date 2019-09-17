@@ -1,5 +1,6 @@
 export const LocalServer = "ws://localhost:2567"
 export const ProductionServer = "wss://feral-hog-distribution.herokuapp.com"
+export const Server = process.env.NODE_ENV === "production" ? ProductionServer : LocalServer
 
 export const booster = "booster"
 export const navigator = "navigator"

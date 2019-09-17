@@ -2,10 +2,10 @@ import React from 'react'
 
 import { booster, wrangler, navigator, lifeSupport } from './Constants'
 
-export default function RoleDescription({ roleId, children }) {
+export default function RoleDescription({ role, children }) {
 
   function content() {
-    switch (roleId) {
+    switch (role.id) {
       case booster:
         return (
           <>
@@ -16,21 +16,18 @@ export default function RoleDescription({ roleId, children }) {
         return (
           <>
             <h2>You are the <strong>Wrangler</strong></h2>
-
           </>
         )
       case navigator:
         return (
           <>
             <h2>You are the <strong>Navigator</strong></h2>
-
           </>
         )
       case lifeSupport:
         return (
           <>
             <h2>You are the <strong>Habitator</strong></h2>
-
          </>
         )
       default:

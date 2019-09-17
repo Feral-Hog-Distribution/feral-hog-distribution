@@ -3,10 +3,10 @@ import * as Colyseus from "colyseus.js";
 import React from 'react'
 import './Game.scss'
 
-import { LocalServer, ProductionServer, lifeSupport, navigator, wrangler, booster } from "../Constants"
+import { Server } from "../Constants"
 
 import Boop from '../Boop/Boop'
-import Target from '../Target'
+// import Target from '../Target'
 import RoleDescription from "../RoleDescription";
 import ScoreScreen from "../ScoreScreen";
 import Header from "../Header";
@@ -24,29 +24,24 @@ export default class Game extends React.Component {
 
   defaultState = () => {
     return {
+      sessionId: null,
       room: null,
-      [booster]: this.defaultRoleShape(),
-      [navigator]: this.defaultRoleShape(),
-      [wrangler]:  this.defaultRoleShape(),
-      [lifeSupport]: this.defaultRoleShape(),
-      stage: null,
-      roleId: null,
-      roleName: null,
+      roles: {},
+      stage: 0,
       betweenRounds: null,
-      totalBoopsRequired: null,
-      secondsForLastRound: null,
-      multiplier: 100,
+      boopsToGo: null,
+      secondsFormLastRound: null,
+      boopsRequiredCurrentRound: 0,
       cashFromRound: 0,
       totalCash: 0,
       viewer: true,
-      currentBoopsThisRound: 0,
     }
   }
 
   state = this.defaultState()
 
   updateBoops(value = 1) {
-    this.state.room.send({ command: this.state.roleId, value: value });
+    this.state.room.send({ command: "updateBoops", value: value });
   }
 
   resetGame = () => {
@@ -64,14 +59,14 @@ export default class Game extends React.Component {
     const joinAsViewer = params.has("viewer");
     this.setState({ viewer: joinAsViewer })
 
-    const client = new Colyseus.Client(process.env.NODE_ENV === "production" ? ProductionServer : LocalServer);
+    const client = new Colyseus.Client(Server);
     client.joinOrCreate("feral-hog-distribution", { joinAsViewer }).then(room => {
-      setState({ room })
+      setState({ room, sessionId: room.sessionId })
 
-      // set player role and name
-      room.state.zones.onChange = function(update, sessionId) {
-        if (update.clientId === sessionId)
+      room.state.roles.onChange = function(update, sessionId) {
+        if (update.clientId === sessionId) {
           setState({ roleId: update.id, roleName: update.name })
+        }
       }
 
       room.state.onChange = (changes) => {
@@ -84,50 +79,47 @@ export default class Game extends React.Component {
     })
   }
 
-  yourRole() {
-    return this.state[this.state.roleId]
+  getRole(sessionId = this.state.sessionId) {
+    return this.state.roles[sessionId]
   }
 
-  yourBoops() {
-    const yourRole = this.state[this.state.roleId]
-    if (!yourRole) return null
+  getBoops(sessionId = this.state.sessionId) {
+    const role = this.getRole(sessionId)
+    if (!role) return null
 
-    return yourRole.boops
+    return role.roundBoops
   }
 
-  totalBoops() {
-    const { booster, navigator, wrangler, lifeSupport } = this.state
-    return booster.boops + navigator.boops + wrangler.boops + lifeSupport.boops
+  getScore(sessionId) {
+    if (this.state.roundBoops === 0) return "0"
+
+    return (this.getRole(sessionId).roundBoops/this.state.boopsRequiredCurrentRound*100).toFixed(0)
   }
 
-  getRole(roleId) {
-    return this.state[roleId]
-  }
-
-  yourScore(roleId) {
-    if (this.totalBoops() === 0) return "0"
-
-    return (this.getRole(roleId).boops/this.totalBoops()*100).toFixed(0)
+  scoresArray() {
+    return this.state.playerIds.map(playerId => {
+      return {
+        name: this.getRole(playerId).name,
+        score: this.getScore(playerId)
+      }
+    })
   }
 
   renderScreen() {
-    const { roleId, stage, betweenRounds, totalBoopsRequired, secondsForLastRound, totalCash, cashFromRound, viewer, currentBoopsThisRound } = this.state
-    const role = this.yourRole()
+    const { stage, betweenRounds, secondsForLastRound, totalCash, cashFromRound, viewer, boopsToGo, sessionId } = this.state
+    const role = this.getRole(sessionId)
     const readyForNextRound = role ? role.readyForNextRound : null
     if (viewer) {
       return (
         <ProcessScreen currentStage={stage-1}>
-          <span className="display_number">{totalBoopsRequired - currentBoopsThisRound}</span>
+          <span className="display_number">{boopsToGo}</span>
         </ProcessScreen>
       )
     } else if (betweenRounds) {
       return (
         <ScoreScreen
           secondsForRound={secondsForLastRound}
-          habitatorScore={this.yourScore(lifeSupport)}
-          boosterScore={this.yourScore(booster)}
-          wranglerScore={this.yourScore(wrangler)}
-          navigatorScore={this.yourScore(navigator)}
+          scores={this.scoresArray()}
           cashFromRound={cashFromRound}
           totalCash={totalCash}
           currentStage={stage-1}
@@ -137,8 +129,8 @@ export default class Game extends React.Component {
       )
     } else {
       return (
-        <RoleDescription roleId={roleId} >
-          <span className="display_number">{totalBoopsRequired - currentBoopsThisRound}</span>
+        <RoleDescription role={role} >
+          <span className="display_number">{boopsToGo}</span>
           {/* <p>You have {this.yourBoops()} boops</p> */}
           <Boop onBoop={(value) => this.updateBoops(value)} />
           {/* <Target onTargetSuccess={(value) => this.updateBoops(value)} /> */}
