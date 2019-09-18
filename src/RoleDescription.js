@@ -5,6 +5,7 @@ import { booster, wrangler, navigator, lifeSupport } from './Constants'
 export default function RoleDescription({ role, children }) {
 
   function content() {
+    if (!role) return null;
     switch (role.id) {
       case booster:
         return (

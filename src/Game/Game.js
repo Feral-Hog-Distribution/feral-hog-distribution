@@ -1,7 +1,6 @@
 import * as Colyseus from "colyseus.js";
 
 import React from 'react'
-import './Game.scss'
 
 import { Server } from "../Constants"
 
@@ -13,25 +12,19 @@ import Header from "../Header";
 import ProcessScreen from "../ProgressScreen";
 
 export default class Game extends React.Component {
-  defaultRoleShape = () => {
-    return {
-      id: null,
-      name: null,
-      boops: 0,
-      readyForNextRound: false
-    }
-  }
-
   defaultState = () => {
     return {
       sessionId: null,
       room: null,
       roles: {},
+      playerIds: [],
       stage: 0,
-      betweenRounds: null,
-      boopsToGo: null,
+      betweenRounds: false,
+      boopsRequireCurrentRound: 0,
       secondsFormLastRound: null,
-      boopsRequiredCurrentRound: 0,
+      boopsToGo: null,
+      roundBoops: null,
+      totalBoops: null,
       cashFromRound: 0,
       totalCash: 0,
       viewer: true,
@@ -75,6 +68,7 @@ export default class Game extends React.Component {
           stateChanges[change.field] = change.value
         });
         setState(stateChanges)
+        console.log(stateChanges)
       }
     })
   }
@@ -106,10 +100,12 @@ export default class Game extends React.Component {
   }
 
   renderScreen() {
-    const { stage, betweenRounds, secondsForLastRound, totalCash, cashFromRound, viewer, boopsToGo, sessionId } = this.state
+    const { room, stage, betweenRounds, secondsForLastRound, totalCash, cashFromRound, viewer, boopsToGo, sessionId } = this.state
     const role = this.getRole(sessionId)
-    const readyForNextRound = role ? role.readyForNextRound : null
-    if (viewer) {
+    const readyForNextRound = role ? role.readyToPlay : false
+    if (!room) {
+      return <p>Loading...</p>
+    } else if (viewer) {
       return (
         <ProcessScreen currentStage={stage-1}>
           <span className="display_number">{boopsToGo}</span>
